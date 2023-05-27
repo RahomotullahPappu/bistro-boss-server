@@ -9,7 +9,6 @@ app.use(cors());
 app.use(express.json());
 
 
-
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.3x3q4xx.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -29,12 +28,14 @@ async function run() {
 
     const menuCollection = client.db("bistroDb").collection("menu");
     const reviewCollection = client.db("bistroDb").collection("reviews");
-
+    
+    //menu data
     app.get('/menu', async(req, res) =>{
       const result = await menuCollection.find().toArray();
       res.send(result);
   })
 
+   //reviews data 
     app.get('/reviews', async(req, res) =>{
       const result = await reviewCollection.find().toArray();
       res.send(result);
